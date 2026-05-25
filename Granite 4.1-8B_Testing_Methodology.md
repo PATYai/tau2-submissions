@@ -17,7 +17,7 @@ Granite 4.1-8B was tested as the agent model. The user simulator was `gpt-5.1`.
 | Hardware | NVIDIA RTX 3090 24GB |
 | Runtime environment | Ubuntu distrobox |
 | Precision | `bfloat16` |
-| Max model context | `16384` |
+| Max model context | `32768` |
 | GPU memory utilization | `0.85` |
 | Tool-call parser | `granite4` |
 
@@ -30,7 +30,7 @@ vllm serve ibm-granite/granite-4.1-8b \
   --port 8000 \
   --dtype bfloat16 \
   --gpu-memory-utilization 0.85 \
-  --max-model-len 16384 \
+  --max-model-len 32768 \
   --enable-auto-tool-choice \
   --tool-call-parser granite4
 ````
@@ -151,7 +151,7 @@ uv run tau2 run \
   --agent-llm-args '{"api_base":"http://localhost:8000/v1","api_key":"local"}' \
   --user-llm gpt-5.1 \
   --num-trials 4 \
-  --save-to granite41_16k_airline
+  --save-to granite41_32k_airline
 ```
 
 ### Retail
@@ -163,7 +163,7 @@ uv run tau2 run \
   --agent-llm-args '{"api_base":"http://localhost:8000/v1","api_key":"local"}' \
   --user-llm gpt-5.1 \
   --num-trials 4 \
-  --save-to granite41_16k_retail
+  --save-to granite41_32k_retail
 ```
 
 ### Telecom
@@ -175,7 +175,7 @@ uv run tau2 run \
   --agent-llm-args '{"api_base":"http://localhost:8000/v1","api_key":"local"}' \
   --user-llm gpt-5.1 \
   --num-trials 4 \
-  --save-to granite41_16k_telecom
+  --save-to granite41_32k_telecom
 ```
 
 ### Banking Knowledge
@@ -188,7 +188,7 @@ uv run tau2 run \
   --agent-llm-args '{"api_base":"http://localhost:8000/v1","api_key":"local"}' \
   --user-llm gpt-5.1 \
   --num-trials 4 \
-  --save-to granite41_16k_banking_knowledge_bm25
+  --save-to granite41_32k_banking_knowledge_bm25
 ```
 
 ## Submission Preparation
@@ -197,18 +197,18 @@ Use simulation outputs under `data/simulations`, not terminal log files.
 
 ```bash
 uv run tau2 submit prepare \
-  data/simulations/granite41_16k_airline \
-  data/simulations/granite41_16k_retail \
-  data/simulations/granite41_16k_telecom \
-  data/simulations/granite41_16k_banking_knowledge_bm25 \
-  --output ~/ai-work/tau2-runs/granite-4.1-8b-16k/granite-4.1-8b-16k
+  data/simulations/granite41_32k_airline \
+  data/simulations/granite41_32k_retail \
+  data/simulations/granite41_32k_telecom \
+  data/simulations/granite41_32k_banking_knowledge_bm25 \
+  --output ~/ai-work/tau2-runs/granite-4.1-8b-32k/granite-4.1-8b-32k
 ```
 
 Validate:
 
 ```bash
 uv run tau2 submit validate \
-  ~/ai-work/tau2-runs/granite-4.1-8b-16k/granite-4.1-8b-16k \
+  ~/ai-work/tau2-runs/granite-4.1-8b-32k/granite-4.1-8b-32k \
   --mode public
 ```
 
